@@ -1,5 +1,10 @@
 version: '3'
 services:
+  apache:
+    build: ./apache
+    container_name: apache
+    volumes:
+      - ./apache/paginas:/var/www/html:ro
   mariadb:
     image: mariadb
     container_name: mariadb
