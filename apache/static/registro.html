@@ -29,7 +29,7 @@
                 body: raw
             };
 
-            fetch("/api/juegos", requestOptions)
+            fetch("/api/registro", requestOptions)
                 .then(response => response.json())
                 .then(result => {
                     if (result.status == "OK") {

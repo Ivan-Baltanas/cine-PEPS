@@ -16,10 +16,10 @@
             let precio = document.getElementById("precio").value;
             let poster = document.getElementById("foto").value;
             let datos = JSON.stringify({
-                "nombre": titulo,
-                "descripcion": sinopsis,
+                "titulo": titulo,
+                "sinopsis": sinopsis,
                 "precio": precio,
-                "foto": poster
+                "poster": poster
             });
             var requestOptions = {
                 method: 'POST',
@@ -27,7 +27,7 @@
                 body: datos
             };
 
-            fetch("/api/juego", requestOptions)
+            fetch("/api/juegos", requestOptions)
                 .then(response => response.json())
                 .then(result => {
                     if (result.status == "OK") {
