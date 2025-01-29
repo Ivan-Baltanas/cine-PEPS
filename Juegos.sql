@@ -7,6 +7,7 @@ CREATE TABLE peliculas (
     titulo VARCHAR(255) NOT NULL,
     sinopsis VARCHAR(255) NOT NULL,
     precio DECIMAL(9,2) NOT NULL,
+    iva    DECIMAL(9,2) NOT NULL,
     poster VARCHAR(255)
 );
 
