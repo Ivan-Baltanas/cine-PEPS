@@ -15,9 +15,9 @@
     tbody.innerHTML = "";
     lista.forEach(pelicula => {
         tbody.innerHTML += `<tr>
-                <td><img src="${pelicula.foto}" width="70"></td>
-                <td>${pelicula.nombre}</td>
-                <td>${pelicula.descripcion}</td>
+                <td><img src="${pelicula.poster}" width="70"></td>
+                <td>${pelicula.titulo}</td>
+                <td>${pelicula.sinopsis}</td>
                 <td>${pelicula.precio}</td>
                 <td>
                     <a href="/static/editar_juego.html?id=${pelicula.id}" class="button is-info">Editar</a>
