@@ -17,12 +17,16 @@
         function pintarPeliculas(lista) {
     let tbody = document.getElementsByTagName("tbody")[0];
     tbody.innerHTML = "";
+    console.log("LISTITA")
+    console.log(lista);
+    console.log("AQUI ACABA")
     lista.forEach(pelicula => {
         tbody.innerHTML += `<tr>
                 <td><img src="${pelicula.poster}" width="70"></td>
                 <td>${pelicula.titulo}</td>
                 <td>${pelicula.sinopsis}</td>
                 <td>${pelicula.precio}</td>
+                <td>${pelicula.iva}</td>
                 <td>
                     <a href="/static/editar_juego.html?id=${pelicula.id}" class="button is-info">Editar</a>
                 </td>
@@ -31,6 +35,7 @@
                 </td>
             </tr>`; 
     });
+    lista=""
 }
         function cargarPeliculas() {
             var requestOptions = {
@@ -38,12 +43,13 @@
             };
 
             fetch("/api/juegos", requestOptions)
-                .then(response => response.json())
+                .then(response =>response.json())
                 .then(result => {
                     if (result.status) {
                         location.href = "index.html";
                     } else {
                         pintarPeliculas(result);
+                        console.log(result)
                     }
                 })
                 .catch(error => {
@@ -126,6 +132,7 @@
                             <th>Título</th>
                             <th>Sinopsis</th>
                             <th>Precio sin IVA</th>
+                            <th>IVA (21%)</th>
                             <th>Editar</th>
                             <th>Eliminar</th>
                         </tr>

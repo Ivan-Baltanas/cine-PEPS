@@ -14,9 +14,19 @@ def peliculas():
     peliculas, code = controlador_juegos.obtener_peliculas()
     return json.dumps(peliculas, cls=Encoder), code
 
-@app.route("/juegos/<id>", methods=["GET"])
-def pelicula_por_id(id):
+@app.route("/juegos/edit", methods=["POST"])
+def pelicula_por_id():
+    data = request.json  # Recibir JSON
+    print("CUERPOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
+    print(data)
+    if not data or "id" not in data:
+        return json.dumps({"error": "Falta el ID"}), 400
+
+    id = data["id"]
+
     pelicula, code = controlador_juegos.obtener_pelicula_por_id(id)
+    print("EL IDDDD")
+    print(pelicula)
     return json.dumps(pelicula, cls=Encoder), code
 
 @app.route("/juegos", methods=["POST"])
