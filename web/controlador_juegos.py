@@ -5,9 +5,10 @@ import sys
 def insertar_pelicula(titulo, sinopsis, precio, poster):
     try:
         conexion = obtener_conexion()
+        iva= calculariva(precio)
         with conexion.cursor() as cursor:
-            cursor.execute("INSERT INTO peliculas(titulo, sinopsis, precio, poster) VALUES (%s, %s, %s, %s)",
-                           (titulo, sinopsis, precio, poster))
+            cursor.execute("INSERT INTO peliculas(titulo, sinopsis, precio, iva, poster) VALUES (%s, %s, %s, %s, %s)",
+                           (titulo, sinopsis, precio, iva, poster))
             if cursor.rowcount == 1:
                 ret = {"status": "OK"}
             else:
@@ -101,3 +102,6 @@ def actualizar_pelicula(id, titulo, sinopsis, precio, poster):
         ret = {"status": "Failure"}
         code = 500
     return ret, code
+
+def calculariva(importe):
+    return importe*0.21
