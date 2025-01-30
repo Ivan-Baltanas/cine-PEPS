@@ -70,7 +70,8 @@ def eliminar_pelicula(id):
         with conexion.cursor() as cursor:
             cursor.execute("DELETE FROM peliculas WHERE id = %s", (id,))
             if cursor.rowcount == 1:
-                ret = {"status": "OK"}
+                mensaje = f"Película con ID {id} eliminada correctamente."
+                ret = {"status": "OK", "message": mensaje}
             else:
                 ret = {"status": "Failure"}
         conexion.commit()

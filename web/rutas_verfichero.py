@@ -1,5 +1,5 @@
 from __future__ import print_function
-from __main__ import app
+from app import app
 from flask import request
 import os
 import sys

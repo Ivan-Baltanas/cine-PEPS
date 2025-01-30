@@ -1,7 +1,7 @@
 from flask import request, session
 import json
 import decimal
-from __main__ import app
+from app import app
 import controlador_juegos
 
 class Encoder(json.JSONEncoder):

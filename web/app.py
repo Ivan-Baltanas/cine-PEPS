@@ -14,6 +14,6 @@ import rutas_verfichero
 import rutas_juegos
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT'))
+    port = int(os.environ.get('PORT', 8080))
     host = os.environ.get('HOST')
     app.run(host=host, port=port)
