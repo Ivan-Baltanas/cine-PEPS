@@ -5,7 +5,7 @@ services:
     build: ./apache
     container_name: apache
     ports:
-      - 9095:80
+      - 7777:80
     volumes:
       - ./apache/static:/usr/local/apache2/htdocs/static
       - ./apache:/usr/local/apache2/htdocs  # Para los archivos HTML
@@ -39,7 +39,7 @@ services:
     environment:
       MARIADB_ROOT_PASSWORD: example
       MARIADB_USER: agente
-      MARIADB_USER_PASSWORD: 0traClave
+      MARIADB_PASSWORD: 0traClave
       MARIADB_DATABASE: CineApp
     volumes:
       - ./mariadb_data:/var/lib/mysql
