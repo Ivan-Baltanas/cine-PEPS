@@ -8,6 +8,7 @@ services:
       - 9095:80
     volumes:
       - ./apache/static:/usr/local/apache2/htdocs/static
+      - ./apache:/usr/local/apache2/htdocs  # Para los archivos HTML
     depends_on:
       - python
 
@@ -23,6 +24,11 @@ services:
       DB_PORT: 3306
       PORT: 8080
       HOST: 0.0.0.0
+      FLASK_APP: app.py
+      FLASK_ENV: development
+    command: flask run --host=0.0.0.0 --port=8080
+    volumes:
+      - ./web:/app  # Montar el código Python
     depends_on:
       - mariadb
 

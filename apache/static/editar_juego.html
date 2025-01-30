@@ -2,6 +2,9 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Last-Modified" content="0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CineApp - Editar Película</title>
@@ -15,12 +18,16 @@
         onload = function () {
             obtenerDatosPelicula(id);
         }
-        function obtenerDatosPelicula(id) {
-            var requestOptions = {
-                method: 'GET'
+        function obtenerDatosPelicula(id_peli) {
+            let requestOptions = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ id: id_peli })  // Enviar ID en JSON
             };
 
-            fetch("/api/juegos/" + id, requestOptions)
+            fetch("/api/juegos/edit", requestOptions)
                 .then(response => response.json())
                 .then(result => pintarPelicula(result))
                 .catch(error => {
@@ -29,11 +36,17 @@
                     location.href = "/static/juegos.html";
                 });
         }
+        function calcularIva(){
+            let precio = parseFloat(document.getElementById("precio").value);
+            let precioIva= precio*0.21;
+            document.getElementById("iva").value= precio+precioIva;
+        }
         function pintarPelicula(pelicula) {
             document.getElementById("titulo").value = pelicula.titulo;
             document.getElementById("sinopsis").value = pelicula.sinopsis;
             document.getElementById("precio").value = pelicula.precio;
             document.getElementById("poster").value = pelicula.poster;
+            document.getElementById("iva").value=pelicula.precio+pelicula.iva;
         }
         function guardar() {            
             let titulo = document.getElementById("titulo").value;
@@ -99,7 +112,9 @@
                 <label for="descripcion">Sinopsis:</label>
                 <input required type="text" class="input" placeholder="sinopsis" name="sinopsis" id="sinopsis">
                 <label for="precio">Precio:</label>
-                <input required type="number" class="input" placeholder="precio" name="precio" id="precio">
+                <input required type="number" class="input" placeholder="precio" name="precio" id="precio" onblur="calcularIva()">
+                <label for="iva">Precio con IVA (21%):</label>
+                <input required type="text" step="0.001" class="input" placeholder="Iva" name="iva" id="iva" readonly >
                 <label for="foto">Poster:</label>
                 <input required type="text" class="input" placeholder="URL del Poster" name="poster" id="poster">
                 <button type="button" onclick="guardar()" class="button is-success mt-2">Guardar</button>

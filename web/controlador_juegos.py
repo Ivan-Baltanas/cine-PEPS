@@ -5,9 +5,10 @@ import sys
 def insertar_pelicula(titulo, sinopsis, precio, poster):
     try:
         conexion = obtener_conexion()
+        iva= calculariva(precio)
         with conexion.cursor() as cursor:
-            cursor.execute("INSERT INTO peliculas(titulo, sinopsis, precio, poster) VALUES (%s, %s, %s, %s)",
-                           (titulo, sinopsis, precio, poster))
+            cursor.execute("INSERT INTO peliculas(titulo, sinopsis, precio, iva, poster) VALUES (%s, %s, %s, %s, %s)",
+                           (titulo, sinopsis, precio, iva, poster))
             if cursor.rowcount == 1:
                 ret = {"status": "OK"}
             else:
@@ -27,15 +28,19 @@ def convertir_pelicula_a_json(pelicula):
     d['titulo'] = pelicula[1]
     d['sinopsis'] = pelicula[2]
     d['precio'] = pelicula[3]
-    d['poster'] = pelicula[4]
+    d['iva'] = pelicula[4]
+    d['poster'] = pelicula[5]
+    
     return d
 
 def obtener_peliculas():
     try:
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
-            cursor.execute("SELECT id, titulo, sinopsis, precio, poster FROM peliculas")
+            cursor.execute("SELECT id, titulo, sinopsis, precio, iva, poster FROM peliculas")
             peliculas = cursor.fetchall()
+            print("LLEGA")
+            print(peliculas)
             peliculas_json = []
             if peliculas:
                 for pelicula in peliculas:
@@ -53,8 +58,10 @@ def obtener_pelicula_por_id(id):
     try:
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
-            cursor.execute("SELECT id, titulo, sinopsis, precio, poster FROM peliculas WHERE id =" + id)
+            cursor.execute("SELECT id, titulo, sinopsis, precio, iva, poster FROM peliculas WHERE id = %s", (id,))
             pelicula = cursor.fetchone()
+            print("RESULTADOO")
+            print(pelicula)
             if pelicula is not None:
                 pelicula_json = convertir_pelicula_a_json(pelicula)
         conexion.close()
@@ -70,7 +77,8 @@ def eliminar_pelicula(id):
         with conexion.cursor() as cursor:
             cursor.execute("DELETE FROM peliculas WHERE id = %s", (id,))
             if cursor.rowcount == 1:
-                ret = {"status": "OK"}
+                mensaje = f"Película con ID {id} eliminada correctamente."
+                ret = {"status": "OK", "message": mensaje}
             else:
                 ret = {"status": "Failure"}
         conexion.commit()
@@ -85,9 +93,10 @@ def eliminar_pelicula(id):
 def actualizar_pelicula(id, titulo, sinopsis, precio, poster):
     try:
         conexion = obtener_conexion()
+        iva= calculariva(precio)
         with conexion.cursor() as cursor:
-            cursor.execute("UPDATE peliculas SET titulo = %s, sinopsis = %s, precio = %s, poster = %s WHERE id = %s",
-                           (titulo, sinopsis, precio, poster, id))
+            cursor.execute("UPDATE peliculas SET titulo = %s, sinopsis = %s, precio = %s, iva=%s, poster = %s WHERE id = %s",
+                           (titulo, sinopsis, precio, iva, poster, id))
             if cursor.rowcount == 1:
                 ret = {"status": "OK"}
             else:
@@ -100,3 +109,6 @@ def actualizar_pelicula(id, titulo, sinopsis, precio, poster):
         ret = {"status": "Failure"}
         code = 500
     return ret, code
+
+def calculariva(importe):
+    return importe*0.21
