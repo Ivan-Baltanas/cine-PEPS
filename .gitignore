@@ -1,2 +1,3 @@
 mariadb_data/
 web/__pycache__/
+web/pruebas/__pycache__/
