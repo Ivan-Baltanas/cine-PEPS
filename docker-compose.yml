@@ -5,7 +5,7 @@ services:
     build: ./apache
     container_name: apache
     ports:
-      - 9095:80
+      - 7777:80
     volumes:
       - ./apache/static:/usr/local/apache2/htdocs/static
       - ./apache:/usr/local/apache2/htdocs  # Para los archivos HTML
