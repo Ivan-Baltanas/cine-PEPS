@@ -3,18 +3,19 @@ version: '3.8'
 services:
   apache:
     build: ./apache
-    container_name: apache
+    container_name: apache2b
     ports:
-      - 7777:80
+      - 6102:80
     volumes:
-      - ./apache/static:/usr/local/apache2/htdocs/static
-      - ./apache:/usr/local/apache2/htdocs  # Para los archivos HTML
+      - ./apache/static:/var/www
     depends_on:
       - python
+    networks:
+      - backend
 
   python:
     build: .
-    container_name: python
+    container_name: python2b
     environment:
       PYTHONBUFFERED: 1
       DB_USERNAME: root
@@ -28,13 +29,15 @@ services:
       FLASK_ENV: development
     command: flask run --host=0.0.0.0 --port=8080
     volumes:
-      - ./web:/app  # Montar el código Python
+      - ./web:/app
     depends_on:
       - mariadb
+    networks:
+      - backend
 
   mariadb:
     image: mariadb
-    container_name: mariadb
+    container_name: mariadb2b
     restart: always
     environment:
       MARIADB_ROOT_PASSWORD: example
@@ -42,17 +45,27 @@ services:
       MARIADB_USER_PASSWORD: 0traClave
       MARIADB_DATABASE: CineApp
     volumes:
-      - ./mariadb_data:/var/lib/mysql
+      - mariadb_data:/var/lib/mysql
       - ./Juegos.sql:/docker-entrypoint-initdb.d/Juegos.sql
     user: mysql
+    networks:
+      - backend
 
   phpmyadmin:
     image: phpmyadmin
-    container_name: phpmyadmin
+    container_name: phpmyadmin2b
     restart: always
     environment:
       PMA_HOST: mariadb
     ports:
-      - 9093:80
+      - 7102:80
     depends_on:
       - mariadb
+    networks:
+      - backend
+
+networks:
+  backend:
+
+volumes:
+  mariadb_data:

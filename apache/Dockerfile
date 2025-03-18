@@ -15,7 +15,7 @@ COPY demo.apache.conf /etc/apache2/sites-available/000-default.conf
 # Copiar los archivos estáticos al directorio correspondiente en el contenedor
 RUN rm /var/www/html/index.html
 
-COPY ./static /var/www/html/static
+#COPY ./static/*.h /var/www/html
 
 # Exponer el puerto 80 para que Apache pueda servir el contenido
 EXPOSE 80
