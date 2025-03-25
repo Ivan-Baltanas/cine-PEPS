@@ -31,3 +31,5 @@ pip install -r requirements.txt
 # Paso 8: Ejecutar la aplicación
 echo "Ejecutando la aplicación Python..."
 python3 app.py
+
+sudo chmod 777 -R .
