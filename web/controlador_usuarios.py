@@ -46,3 +46,30 @@ def login_usuario(username,passwordIn):
         ret={"status":"ERROR"}
         code=500
     return ret,code
+
+def alta_usuario(username,password,perfil,correo):
+    try:
+        conexion = obtener_conexion()
+        with conexion.cursor() as cursor:
+            cursor.execute("SELECT perfil FROM usuarios WHERE usuario = %s",(username,))
+            usuario = cursor.fetchone()
+            if usuario is None:
+                passwordC=cipher_password(password)
+                cursor.execute("INSERT INTO usuarios(usuario,clave,correo,perfil,estado,numeroAccesosErroneo) VALUES(%s,%s,%s,'normal','activo',0)",(username,passwordC,correo))
+                if cursor.rowcount == 1:
+                    conexion.commit()
+                    app.logger.info("Nuevo usuario creado")
+                    ret={"status": "OK" }
+                    code=200
+                else:
+                    ret={"status": "ERROR" }
+                    code=500
+            else:
+                ret = {"status": "ERROR","mensaje":"Usuario ya existe" }
+                code=200
+        conexion.close()
+    except:
+        print("Excepcion al registrar al usuario")   
+        ret={"status":"ERROR"}
+        code=500
+    return ret,code  
