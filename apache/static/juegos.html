@@ -28,7 +28,7 @@
                 <td>${pelicula.precio}</td>
                 <td>${pelicula.iva}</td>
                 <td>
-                    <a href="/static/editar_juego.html?id=${pelicula.id}" class="button is-info">Editar</a>
+                    <a href="editar_juego.html?id=${pelicula.id}" class="button is-info">Editar</a>
                 </td>
                 <td>
                     <button class="button is-danger" onclick="eliminarPelicula(${pelicula.id})">Eliminar</button>
@@ -85,7 +85,7 @@
                 .then(response => response.json())
                 .then(result => {
                     if (result.status == "OK") {
-                        location.href = "/static/index.html";
+                        location.href = "index.html";
                     } else {
                         alert("No se ha podido cerrar sesión");
                     }
@@ -110,8 +110,8 @@
         </div>
         <div class="navbar-menu">
             <div class="navbar-start">
-                <a class="navbar-item" href="/static/juegos.html">Películas</a>
-                <a class="navbar-item" href="/static/subida.html">Archivos</a>
+                <a class="navbar-item" href="juegos.html">Películas</a>
+                <a class="navbar-item" href="subida.html">Archivos</a>
                 <a class="navbar-item" href="javascript:cerrarSesion()">Cerrar sesión</a>
             </div>
             <div class="navbar-end">
@@ -124,7 +124,7 @@
         <div class="columns">
             <div class="column">
                 <h3 class="is-size-3">Cartelera de Películas</h3>
-                <a href="/static/agregar_juego.html" class="button is-success">Agregar</a>
+                <a href="./agregar_juego.html" class="button is-success">Agregar</a>
                 <table class="table">
                     <thead>
                         <tr>

@@ -33,7 +33,7 @@
                 .catch(error => {
                     console.log('error', error)
                     alert("Ha habido un error al recuperar los datos de la película");
-                    location.href = "/static/juegos.html";
+                    location.href = "juegos.html";
                 });
         }
         function calcularIva(){
@@ -71,7 +71,7 @@
                 .then(result => {
                     if (result.status == "OK") {
                         alert("Película modificada");
-                        location.href = "/static/juegos.html";
+                        location.href = "juegos.html";
                     } else {
                         alert("La película no ha podido ser modificada");
                     }
@@ -95,7 +95,7 @@
         </div>
         <div class="navbar-menu">
             <div class="navbar-start">
-                <a class="navbar-item" href="/static/juegos">Películas</a>
+                <a class="navbar-item" href="juegos">Películas</a>
             </div>
             <div class="navbar-end">
                 <div class="navbar-item">
@@ -118,7 +118,7 @@
                 <label for="foto">Poster:</label>
                 <input required type="text" class="input" placeholder="URL del Poster" name="poster" id="poster">
                 <button type="button" onclick="guardar()" class="button is-success mt-2">Guardar</button>
-                <a href="/static/juegos.html" class="button is-primary mt-2">Volver</a>
+                <a href="juegos.html" class="button is-primary mt-2">Volver</a>
             </form>
         </div>
     </div>
