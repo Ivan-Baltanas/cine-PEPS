@@ -1,6 +1,7 @@
 import os
 from flask import Flask
 from flask_wtf.csrf import CSRFProtect
+from funciones_auxiliares import prepare_response_extra_headers
 
 
 app = Flask(__name__)
@@ -10,6 +11,9 @@ csrf = CSRFProtect(app)
 def csrf_protect():
  if not request.path.startswith("/login") and not request.path.startswith("/registro"):
  csrf.protect()
+
+#Configuración de la cabecera
+extra_headers=prepare_response_extra_headers(True)
 
 import rutas_inicio
 

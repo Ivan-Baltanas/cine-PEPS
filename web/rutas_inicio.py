@@ -27,7 +27,7 @@ def login():
     else:
         respuesta={"status":"Bad request"}
         code=401
-    response= make_response(json.dumps(respuesta, cls=Encoder), code)
+    response=make_response(json.dumps(ret),code)
     return response
 
 
@@ -52,7 +52,7 @@ def registro():
     else:
         respuesta={"status":"Bad request"}
         code=401
-    response= make_response(json.dumps(respuesta, cls=Encoder), code)
+    response=make_response(json.dumps(ret),code)
     return response
 
 @app.route("/logout", methods=['GET'])
