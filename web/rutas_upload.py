@@ -15,7 +15,11 @@ def upload():
         
         print(f"Guardando archivo en: {ruta_subida}", file=sys.stdout)
         archivo.save(ruta_subida)
-        return json.dumps({"status": "OK"}), 200
+        ret={"status":"OK"}
+        code=200
     except Exception as e:
         print(f"Error al subir el archivo: {e}", file=sys.stdout)
-        return json.dumps({"status": "ERROR"}), 500
+        ret={"status":"ERROR"}
+        code=500
+    response=make_response(json.dumps(ret),code)
+    return response

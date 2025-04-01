@@ -17,15 +17,15 @@ def login():
             username = sanitize_input(login_json['username'])
             password = sanitize_input(login_json['password'])
             if isinstance(username, str) and isinstance(password, str) and len(username) < 50 and len(password) < 50:
-                respuesta,code= controlador_usuarios.login_usuario(username,password)
+                ret,code= controlador_usuarios.login_usuario(username,password)
             else:
-                respuesta={"status":"Bad parameters"}
+                ret={"status":"Bad parameters"}
                 code=401
         else:
-            respuesta={"status":"Bad request"}
+            ret={"status":"Bad request"}
             code=401
     else:
-        respuesta={"status":"Bad request"}
+        ret={"status":"Bad request"}
         code=401
     response=make_response(json.dumps(ret),code)
     return response
@@ -42,22 +42,27 @@ def registro():
             profile = sanitize_input(login_json['profile'])
             email = sanitize_input(login_json['email'])
             if isinstance(username, str) and isinstance(password, str) and isinstance(profile, str) and len(username) < 50 and len(password) < 50:
-                respuesta,code= controlador_usuarios.alta_usuario(username,password,profile,email)
+                ret,code= controlador_usuarios.alta_usuario(username,password,profile,email)
             else:
-                respuesta={"status":"Bad parameters"}
+                ret={"status":"Bad parameters"}
                 code=401
         else:
-            respuesta={"status":"Bad request"}
+            ret={"status":"Bad request"}
             code=401
     else:
-        respuesta={"status":"Bad request"}
+        ret={"status":"Bad request"}
         code=401
     response=make_response(json.dumps(ret),code)
     return response
 
-@app.route("/logout", methods=['GET'])
+ @app.route("/logout",methods=['GET'])
 def logout():
-    print("Cerrando sesión", file=sys.stdout)
-    session.clear()
-    print("Sesión cerrada correctamente", file=sys.stdout)
-    return json.dumps({"status": "OK"}), 200
+ try:
+ delete_session()
+ ret={"status":"OK"}
+ code=200
+ except:
+ ret={"status":"ERROR"}
+ code=500
+ response=make_response(json.dumps(ret),code)
+ return response

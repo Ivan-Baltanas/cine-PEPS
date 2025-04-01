@@ -12,22 +12,19 @@ class Encoder(json.JSONEncoder):
 @app.route("/juegos", methods=["GET"])
 def peliculas():
     peliculas, code = controlador_juegos.obtener_peliculas()
-    return json.dumps(peliculas, cls=Encoder), code
+    response=make_response(json.dumps(peliculas),code)
+    return response
 
 @app.route("/juegos/edit", methods=["POST"])
 def pelicula_por_id():
     data = request.json  # Recibir JSON
-    print("CUERPOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
-    print(data)
     if not data or "id" not in data:
         return json.dumps({"error": "Falta el ID"}), 400
-
     id = data["id"]
-
     pelicula, code = controlador_juegos.obtener_pelicula_por_id(id)
-    print("EL IDDDD")
-    print(pelicula)
-    return json.dumps(pelicula, cls=Encoder), code
+    response=make_response(json.dumps(pelicula),code)
+    return response
+
 
 @app.route("/juegos", methods=["POST"])
 def guardar_pelicula():
@@ -43,12 +40,16 @@ def guardar_pelicula():
     else:
         ret = {"status": "Bad request"}
         code = 401
-    return json.dumps(ret), code
+        
+    response=make_response(json.dumps(ret),code)
+    return response
 
 @app.route("/juegos/<id>", methods=["DELETE"])
 def eliminar_pelicula(id):
     ret, code = controlador_juegos.eliminar_pelicula(id)
-    return json.dumps(ret), code
+    response=make_response(json.dumps(ret),code)
+    return response
+
 
 @app.route("/juegos", methods=["PUT"])
 def actualizar_pelicula():
@@ -65,4 +66,5 @@ def actualizar_pelicula():
     else:
         ret = {"status": "Bad request"}
         code = 401
-    return json.dumps(ret), code
+    response=make_response(json.dumps(ret),code)
+    return response

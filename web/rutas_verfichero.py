@@ -14,9 +14,15 @@ def ver_archivo(archivo):
         
         if os.path.exists(ruta_archivo):
             salida = subprocess.getoutput(f"cat {ruta_archivo}")
-            return json.dumps({"status": "OK", "contenido": salida}), 200
+            ret={"status":"OK"}
+            code=200
+            response=make_response(json.dumps({ret,"contenido": salida }),code)
+            # return json.dumps({"status": "OK", "contenido": salida}), 200
         # else:
         #     return json.dumps({"status": "ERROR", "mensaje": "El archivo no existe"}), 404
     except Exception as e:
         print(f"Error al leer el archivo: {e}", file=sys.stdout)
-        return json.dumps({"status": "ERROR"}), 500
+        ret={"status":"ERROR"}
+        code=500
+        response=make_response(json.dumps(ret),code)
+    return response
