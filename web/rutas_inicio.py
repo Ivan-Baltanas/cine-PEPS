@@ -6,7 +6,7 @@ import json
 import sys
 import traceback  # Para capturar trazas de errores
 import controlador_usuarios
-import funciones_auxiliares import Encoder, sanitize_input,delete_session
+import funciones_auxiliares import Encoder, sanitize_input, delete_session
 
 @app.route("/login", methods=['POST'])
 def login():
