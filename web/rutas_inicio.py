@@ -10,8 +10,8 @@ import funciones_auxiliares import Encoder, sanitize_input,delete_session
 
 @app.route("/login", methods=['POST'])
 def login():
-        content_type = request.headers.get('Content-Type')
-    if (content_type == 'application/json'):
+    content_type = request.headers.get('Content-Type')
+    if content_type == 'application/json':
         login_json = request.json
         if "username" in login_json and "password" in login_json:
             username = sanitize_input(login_json['username'])
@@ -33,14 +33,15 @@ def login():
 
 @app.route("/registro", methods=['POST'])
 def registro():
-   content_type = request.headers.get('Content-Type')
-    if (content_type == 'application/json'):
+    content_type = request.headers.get('Content-Type')
+    if content_type == 'application/json':
         login_json = request.json
         if "username" in login_json and "password" in login_json and "profile" in login_json and "email" in login_json:
             username = sanitize_input(login_json['username'])
             password = sanitize_input(login_json['password'])
             profile = sanitize_input(login_json['profile'])
             email = sanitize_input(login_json['email'])
+
             if isinstance(username, str) and isinstance(password, str) and isinstance(profile, str) and len(username) < 50 and len(password) < 50:
                 ret,code= controlador_usuarios.alta_usuario(username,password,profile,email)
             else:

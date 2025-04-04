@@ -1,7 +1,11 @@
-import bcrypt
-import datetime
 from werkzeug.http import http_date
 from flask import session
+import json
+import decimal
+import html
+import bleach
+import bcrypt
+import datetime
 
 
 def cipher_password(password):
@@ -65,3 +69,8 @@ else:
 return False
 except:
 return False
+
+def sanitize_input(user_input):
+ # Usamos bleach para eliminar etiquetas HTML no deseadas
+ escaped_input = html.escape(user_input)
+ return bleach.clean(escaped_input)  
