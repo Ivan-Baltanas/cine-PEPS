@@ -55,14 +55,14 @@ def registro():
     response=make_response(json.dumps(ret),code)
     return response
 
- @app.route("/logout",methods=['GET'])
+@app.route("/logout",methods=['GET'])
 def logout():
  try:
- delete_session()
- ret={"status":"OK"}
- code=200
+    delete_session()
+    ret={"status":"OK"}
+    code=200
  except:
- ret={"status":"ERROR"}
- code=500
- response=make_response(json.dumps(ret),code)
+    ret={"status":"ERROR"}
+    code=500
+response=make_response(json.dumps(ret),code)
  return response

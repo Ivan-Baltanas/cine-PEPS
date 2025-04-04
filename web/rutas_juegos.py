@@ -11,18 +11,27 @@ class Encoder(json.JSONEncoder):
 
 @app.route("/juegos", methods=["GET"])
 def peliculas():
-    peliculas, code = controlador_juegos.obtener_peliculas()
+    if (validar_session_normal()):
+        peliculas, code = controlador_juegos.obtener_peliculas()
+    else:
+        peliculas={"status":"Forbidden"}
+        code=403
     response=make_response(json.dumps(peliculas),code)
     return response
 
-@app.route("/juegos/edit", methods=["POST"])
-def pelicula_por_id():
-    data = request.json  # Recibir JSON
-    if not data or "id" not in data:
-        return json.dumps({"error": "Falta el ID"}), 400
-    id = data["id"]
-    pelicula, code = controlador_juegos.obtener_pelicula_por_id(id)
-    response=make_response(json.dumps(pelicula),code)
+@app.route("/juegos/<id>",methods=["GET"])
+def pelicula_por_id(id):
+    id = sanitize_input(id)
+    if isinstance(id, str) and len(id)<64:
+        if (validar_session_normal()):
+            pelicula, code = controlador_juegos.obtener_pelicula_por_id(id)
+        else:
+            pelicula={"status":"Forbidden"}
+            code=403
+    else:
+        pelicula={"status":"Bad parameters"}
+        code=401
+    response= make_response(json.dumps(pelicula, cls=Encoder), code)
     return response
 
 
@@ -67,4 +76,35 @@ def actualizar_pelicula():
         ret = {"status": "Bad request"}
         code = 401
     response=make_response(json.dumps(ret),code)
+    return response
+
+@app.route("/juegos", methods=["PUT"])
+def actualizar_pelicula():
+    content_type = request.headers.get('Content-Type')
+    if (content_type == 'application/json'):
+        pelicula_json = request.json
+        if "id" in pelicula_json and "titulo" in pelicula_json and "sinopsis" in pelicula_json and "poster" in pelicula_json:
+            id = request.json["id"]
+            titulo = sanitize_input(chuche_json["titulo"])
+            sinopsis = sanitize_input(chuche_json["sinopsis"])
+            precio = chuche_json["precio"]
+            poster = sanitize_input(chuche_json["poster"])
+            if id.isnumeric() and isinstance(titulo, str) and isinstance(sinopsis, str) and precio.isnumeric() and isinstance(poster, str) and len(id)<8 and len(titulo)<128 and len(sinopsis)<512 and len(poster)<128:
+                id=int(id)
+                precio=float(precio)
+                if (validar_session_normal()):
+                    ret,code=controlador_juegos.actualizar_pelicula(id,titulo,sinopsis,precio,poster)
+                else: 
+                    ret={"status":"Forbidden"}
+                    code=403
+            else:
+                ret={"status":"Bad request"}
+                code=401
+        else:
+            ret={"status":"Bad request"}
+            code=401
+    else:
+        ret={"status":"Bad request"}
+        code=401
+    response= make_response(json.dumps(ret, cls=Encoder), code)
     return response

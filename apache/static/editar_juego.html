@@ -27,11 +27,10 @@
                 body: JSON.stringify({ id: id_peli })  // Enviar ID en JSON
             };
 
-            fetch("/api/juegos/edit", requestOptions)
+            fetch("/api/juegos/" + id, requestOptions)
                 .then(response => response.json())
                 .then(result => pintarPelicula(result))
                 .catch(error => {
-                    console.log('error', error)
                     alert("Ha habido un error al recuperar los datos de la película");
                     location.href = "juegos.html";
                 });
