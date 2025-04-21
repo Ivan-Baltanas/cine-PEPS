@@ -15,28 +15,28 @@
             cargarPeliculas();
         }
         function pintarPeliculas(lista) {
-    let tbody = document.getElementsByTagName("tbody")[0];
-    tbody.innerHTML = "";
-    console.log("LISTITA")
-    console.log(lista);
-    console.log("AQUI ACABA")
-    lista.forEach(pelicula => {
-        tbody.innerHTML += `<tr>
-                <td><img src="${pelicula.poster}" width="70"></td>
-                <td>${pelicula.titulo}</td>
-                <td>${pelicula.sinopsis}</td>
-                <td>${pelicula.precio}</td>
-                <td>${pelicula.iva}</td>
-                <td>
-                    <a href="editar_juego.html?id=${pelicula.id}" class="button is-info">Editar</a>
-                </td>
-                <td>
-                    <button class="button is-danger" onclick="eliminarPelicula(${pelicula.id})">Eliminar</button>
-                </td>
-            </tr>`; 
-    });
-    lista=""
-}
+            let tbody = document.getElementsByTagName("tbody")[0];
+            tbody.innerHTML = "";
+            console.log("LISTITA")
+            console.log(lista);
+            console.log("AQUI ACABA")
+            lista.forEach(pelicula => {
+                tbody.innerHTML += `<tr>
+                        <td><img src="${pelicula.poster}" width="70"></td>
+                        <td>${pelicula.titulo}</td>
+                        <td>${pelicula.sinopsis}</td>
+                        <td>${pelicula.precio}</td>
+                        <td>${pelicula.iva}</td>
+                        <td>
+                            <a href="editar_juego.html?id=${pelicula.id}" class="button is-info">Editar</a>
+                        </td>
+                        <td>
+                            <button class="button is-danger" onclick="eliminarPelicula(${pelicula.id})">Eliminar</button>
+                        </td>
+                    </tr>`; 
+            });
+            lista=""
+        }
         function cargarPeliculas() {
             var requestOptions = {
                 method: 'GET'
