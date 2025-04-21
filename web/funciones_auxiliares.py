@@ -73,20 +73,3 @@ def sanitize_input(user_input):
  # Usamos bleach para eliminar etiquetas HTML no deseadas
     escaped_input = html.escape(user_input)
     return bleach.clean(escaped_input)  
-
-def validar_session_normal():
-    try:
-        if (session["usuario"] and session["usuario"]!=""):
-            return True
-        else:
-            return False
-    except:
-        return False
-def validar_session_admin():
-    try:
-        if (session["usuario"] and session["usuario"]!="" and session["perfil"]=="admin"):
-            return True
-        else:
-            return False
-    except:
-        return False

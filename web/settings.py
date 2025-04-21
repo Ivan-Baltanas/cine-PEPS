@@ -1,5 +1,4 @@
 # SECRET_KEY = 'you-will-never-guess'
-DEBUG=True
 import os
 
 DEBUG=False  #en producción se pone a false
