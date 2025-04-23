@@ -16,10 +16,14 @@ services:
   python:
     build: .
     container_name: python2b
+    restart: always
+
     environment:
       PYTHONBUFFERED: 1
-      DB_USERNAME: root
-      DB_PASSWORD: example
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      SECRET_KEY: ${SECRET_KEY}
+      WTF_CSRF_SECRET_KEY: ${WTF_CSRF_SECRET_KEY}   
       DB_DATABASE: CineApp
       DB_HOST: mariadb
       DB_PORT: 3306
@@ -32,6 +36,10 @@ services:
       - ./web:/app
     depends_on:
       - mariadb
+    links:
+      - mariadb
+    env_file:
+      - .env
     networks:
       - backend
 
