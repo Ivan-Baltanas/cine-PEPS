@@ -30,7 +30,6 @@ def convertir_pelicula_a_json(pelicula):
     d['precio'] = pelicula[3]
     d['iva'] = pelicula[4]
     d['poster'] = pelicula[5]
-    
     return d
 
 def obtener_peliculas():
