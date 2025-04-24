@@ -101,17 +101,6 @@ def eliminar_pelicula(id):
     return response
 
 
-def convertir_pelicula_a_json(pelicula):
-    d = {}
-    d['id'] = pelicula[0]
-    d['titulo'] = sanitize_input(pelicula[1])
-    d['sinopsis'] = sanitize_input(pelicula[2])
-    d['precio'] = pelicula[3]
-    d['poster'] = sanitize_input(pelicula[4])
-    return d
-    response=make_response(json.dumps(ret),code)
-    return response
-
 @app.route("/juegos", methods=["PUT"])
 def actualizar_pelicula():
     content_type = request.headers.get('Content-Type')
@@ -153,33 +142,3 @@ def convertir_pelicula_a_json(pelicula):
     response=make_response(json.dumps(ret),code)
     return response
 
-@app.route("/juegos", methods=["PUT"])
-def actualizar_pelicula():
-    content_type = request.headers.get('Content-Type')
-    if (content_type == 'application/json'):
-        pelicula_json = request.json
-        if "id" in pelicula_json and "titulo" in pelicula_json and "sinopsis" in pelicula_json and "poster" in pelicula_json:
-            id = request.json["id"]
-            titulo = sanitize_input(chuche_json["titulo"])
-            sinopsis = sanitize_input(chuche_json["sinopsis"])
-            precio = chuche_json["precio"]
-            poster = sanitize_input(chuche_json["poster"])
-            if id.isnumeric() and isinstance(titulo, str) and isinstance(sinopsis, str) and precio.isnumeric() and isinstance(poster, str) and len(id)<8 and len(titulo)<128 and len(sinopsis)<512 and len(poster)<128:
-                id=int(id)
-                precio=float(precio)
-                if (validar_session_normal()):
-                    ret,code=controlador_juegos.actualizar_pelicula(id,titulo,sinopsis,precio,poster)
-                else: 
-                    ret={"status":"Forbidden"}
-                    code=403
-            else:
-                ret={"status":"Bad request"}
-                code=401
-        else:
-            ret={"status":"Bad request"}
-            code=401
-    else:
-        ret={"status":"Bad request"}
-        code=401
-    response= make_response(json.dumps(ret, cls=Encoder), code)
-    return response
