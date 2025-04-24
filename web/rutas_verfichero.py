@@ -1,10 +1,11 @@
 from __future__ import print_function
 from app import app
-from flask import request
+from flask import request, make_response
 import os
 import sys
 import json
 import subprocess
+from funciones_auxiliares import validar_session_normal
 
 @app.route('/ver/<archivo>', methods=['GET'])
 def ver_archivo(archivo):

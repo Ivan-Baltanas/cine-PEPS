@@ -1,4 +1,4 @@
-from flask import request, session
+from flask import request, session, make_response
 import json
 import decimal
 from app import app
@@ -19,6 +19,28 @@ def peliculas():
         peliculas={"status":"Forbidden"}
         code=403
     response=make_response(json.dumps(peliculas),code)
+    return response
+    if (validar_session_normal()):
+        peliculas, code = controlador_juegos.obtener_peliculas()
+    else:
+        peliculas={"status":"Forbidden"}
+        code=403
+    response=make_response(json.dumps(peliculas),code)
+    return response
+
+@app.route("/juegos/<id>",methods=["GET"])
+def pelicula_por_id(id):
+    id = sanitize_input(id)
+    if isinstance(id, str) and len(id)<64:
+        if (validar_session_normal()):
+            pelicula, code = controlador_juegos.obtener_pelicula_por_id(id)
+        else:
+            pelicula={"status":"Forbidden"}
+            code=403
+    else:
+        pelicula={"status":"Bad parameters"}
+        code=401
+    response= make_response(json.dumps(pelicula, cls=Encoder), code)
     return response
 
 @app.route("/juegos/<id>",methods=["GET"])
@@ -79,18 +101,42 @@ def eliminar_pelicula(id):
     return response
 
 
+def convertir_pelicula_a_json(pelicula):
+    d = {}
+    d['id'] = pelicula[0]
+    d['titulo'] = sanitize_input(pelicula[1])
+    d['sinopsis'] = sanitize_input(pelicula[2])
+    d['precio'] = pelicula[3]
+    d['poster'] = sanitize_input(pelicula[4])
+    return d
+    response=make_response(json.dumps(ret),code)
+    return response
+
 @app.route("/juegos", methods=["PUT"])
 def actualizar_pelicula():
     content_type = request.headers.get('Content-Type')
-    if content_type == 'application/json':
+    if (content_type == 'application/json'):
         pelicula_json = request.json
-        ret, code = controlador_juegos.actualizar_pelicula(
-            pelicula_json["id"], 
-            pelicula_json["titulo"], 
-            pelicula_json["sinopsis"], 
-            float(pelicula_json["precio"]), 
-            pelicula_json["poster"]
-        )
+        if "id" in pelicula_json and "titulo" in pelicula_json and "sinopsis" in pelicula_json and "poster" in pelicula_json:
+            id = request.json["id"]
+            titulo = sanitize_input(pelicula_json["titulo"])
+            sinopsis = sanitize_input(pelicula_json["sinopsis"])
+            precio = pelicula_json["precio"]
+            poster = sanitize_input(pelicula_json["poster"])
+            if id.isnumeric() and isinstance(titulo, str) and isinstance(sinopsis, str) and precio.isnumeric() and isinstance(poster, str) and len(id)<8 and len(titulo)<128 and len(sinopsis)<512 and len(poster)<128:
+                id=int(id)
+                precio=float(precio)
+                if (validar_session_normal()):
+                    ret,code=controlador_juegos.actualizar_pelicula(id,titulo,sinopsis,precio,poster)
+                else: 
+                    ret={"status":"Forbidden"}
+                    code=403
+            else:
+                ret={"status":"Bad request"}
+                code=401
+        else:
+            ret={"status":"Bad request"}
+            code=401
     else:
         ret = {"status": "Bad request"}
         code = 401
