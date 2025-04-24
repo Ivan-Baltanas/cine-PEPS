@@ -1,76 +1,69 @@
-from bd import obtener_conexion
-from funciones_auxiliares import create_session, compare_password, cipher_password
-import datetime as dt
-from flask_wtf.csrf import generate_csrf
+from werkzeug.http import http_date
+from flask import session
+import json
+import decimal
+import html
+import bleach
+import bcrypt
+import datetime
 
-def login_usuario(username, passwordIn):
+def cipher_password(password):
+    hashAndSalt = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt(10))
+    return hashAndSalt
+
+def compare_password(password_hash, password):
+    if password_hash is None:
+        return False
     try:
-        conexion = obtener_conexion()
-        with conexion.cursor() as cursor:
-            cursor.execute("SELECT perfil, clave, numeroAccesosErroneo FROM usuarios WHERE estado='activo' and usuario = %s", (username,))
-            usuario = cursor.fetchone()
-            
-            if usuario is None:
-                ret = {"status": "ERROR", "mensaje": "Usuario/clave erroneo"}
-                code = 200
-            else:
-                perfil = usuario[0]
-                password = usuario[1]
-                numAccesosErroneos = usuario[2]
-                current_date = dt.date.today()
-                hoy = current_date.strftime('%Y-%m-%d')
-
-                if compare_password(password.encode("utf-8"), passwordIn.encode("utf-8")):
-                    ret = {"status": "OK", "csrf_token": generate_csrf(), "perfil": perfil}
-                    app.logger.info("Acceso usuario %s correcto", username)
-                    create_session(username, perfil)
-                    numAccesosErroneos = 0
-                    estado = 'activo'
-                else:
-                    app.logger.info("Acceso usuario %s incorrecto", username)
-                    numAccesosErroneos += 1
-                    estado = "bloqueado" if numAccesosErroneos > 2 else 'activo'
-                    ret = {"status": "ERROR", "mensaje": "Usuario/clave erroneo"}
-
-                cursor.execute("UPDATE usuarios SET numeroAccesosErroneo=%s, fechaUltimoAcceso=%s, estado=%s WHERE usuario=%s",
-                               (numAccesosErroneos, hoy, estado, username))
-                conexion.commit()
-                code = 200
-
-        conexion.close()
+        return bcrypt.checkpw(password, password_hash)
     except:
-        print("Excepcion al validar al usuario")
-        ret = {"status": "ERROR"}
-        code = 500
-    return ret, code
+        return False
 
-def alta_usuario(username, password, perfil, correo):
+def sanitize_input(user_input):
+    escaped_input = html.escape(user_input)
+    return bleach.clean(escaped_input)
+
+def create_session(usuario, perfil):
+    session["usuario"] = usuario
+    session["perfil"] = perfil
+
+def delete_session():
+    session.clear()
+
+def validar_session_normal():
     try:
-        conexion = obtener_conexion()
-        with conexion.cursor() as cursor:
-            cursor.execute("SELECT perfil FROM usuarios WHERE usuario = %s", (username,))
-            usuario = cursor.fetchone()
-            
-            if usuario is None:
-                passwordC = cipher_password(password)
-                cursor.execute("INSERT INTO usuarios(usuario, clave, correo, perfil, estado, numeroAccesosErroneo) VALUES (%s, %s, %s, 'normal', 'activo', 0)",
-                               (username, passwordC, correo))
-                
-                if cursor.rowcount == 1:
-                    conexion.commit()
-                    app.logger.info("Nuevo usuario creado")
-                    ret = {"status": "OK"}
-                    code = 200
-                else:
-                    ret = {"status": "ERROR"}
-                    code = 500
-            else:
-                ret = {"status": "ERROR", "mensaje": "Usuario ya existe"}
-                code = 200
-
-        conexion.close()
+        if session["usuario"] and session["usuario"] != "":
+            return True
+        else:
+            return False
     except:
-        print("Excepcion al registrar al usuario")
-        ret = {"status": "ERROR"}
-        code = 500
-    return ret, code
+        return False
+
+def validar_session_admin():
+    try:
+        if session["usuario"] and session["usuario"] != "" and session["perfil"] == "admin":
+            return True
+        else:
+            return False
+    except:
+        return False
+
+def prepare_response_extra_headers(include_security_headers):
+    response_extra_headers = {
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0',
+        'Last-Modified': http_date(datetime.datetime.now()),
+        'Server': ''
+    }
+    
+    if include_security_headers:
+        response_security_headers = {
+            'X-Frame-Options': 'SAMEORIGIN',
+            'Strict-Transport-Security': 'max-age=63072000; includeSubdomains',
+            'X-Content-Type-Options': 'nosniff',
+            'X-XSS-Protection': '1; mode=block'
+        }
+        response_extra_headers.update(response_security_headers)
+    
+    return response_extra_headers

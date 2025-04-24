@@ -1,0 +1,12 @@
+[2025-04-24 21:29:04,431] INFO in _internal: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://172.18.0.4:8080
+[2025-04-24 21:29:04,431] INFO in _internal: [33mPress CTRL+C to quit[0m
+[2025-04-24 21:29:04,431] INFO in _internal:  * Restarting with stat
+[2025-04-24 21:29:04,751] WARNING in _internal:  * Debugger is active!
+[2025-04-24 21:29:04,754] INFO in _internal:  * Debugger PIN: 115-365-152
+[2025-04-24 21:29:43,879] INFO in app: path: /juegos | method: GET | status: 403 FORBIDDEN | size: 23 >>> 172.18.0.5
+[2025-04-24 21:29:43,880] INFO in _internal: 172.18.0.5 - - [24/Apr/2025 21:29:43] "[31m[1mGET /juegos HTTP/1.1[0m" 403 -
+[2025-04-24 21:29:50,297] INFO in app: path: /login | method: POST | status: 200 OK | size: 55 >>> 172.18.0.5
+[2025-04-24 21:29:50,298] INFO in _internal: 172.18.0.5 - - [24/Apr/2025 21:29:50] "POST /login HTTP/1.1" 200 -
