@@ -3,10 +3,16 @@ from flask import Flask, request
 from flask_wtf.csrf import CSRFProtect
 from funciones_auxiliares import prepare_response_extra_headers
 from logging.config import dictConfig
+from logging.handlers import TimedRotatingFileHandler
 
 app = Flask(__name__)
 app.config.from_pyfile('settings.py')
 csrf = CSRFProtect(app)
+
+# Crear directorio de logs si no existe
+log_dir = "logs"
+if not os.path.exists(log_dir):
+    os.makedirs(log_dir, exist_ok=True)
 
 @app.before_request
 def csrf_protect():
@@ -17,11 +23,13 @@ def csrf_protect():
 extra_headers = prepare_response_extra_headers(True)
 
 # Configuración de las sesiones con cookies
-app.config.update(PERMANENT_SESSION_LIFETIME=600)
-# app.config.update(SESSION_COOKIE_SECURE=True, SESSION_COOKIE_HTTPONLY=True, SESSION_COOKIE_SAMESITE='Lax')  # CON HTTPS
-app.config.update(SESSION_COOKIE_HTTPONLY=True, SESSION_COOKIE_SAMESITE='Lax')  # CON HTTP
+app.config.update(
+    PERMANENT_SESSION_LIFETIME=600,
+    SESSION_COOKIE_HTTPONLY=True,
+    SESSION_COOKIE_SAMESITE='Lax'
+)
 
-# Configuración de logs
+# Configuración mejorada de logging
 dictConfig({
     "version": 1,
     "formatters": {
@@ -37,19 +45,22 @@ dictConfig({
         },
         "file": {
             "class": "logging.FileHandler",
-            "filename": "logs/flask.log",
+            "filename": os.path.join(log_dir, "flask.log"),
             "formatter": "default",
         },
         "time-rotate": {
             "class": "logging.handlers.TimedRotatingFileHandler",
-            "filename": "logs/flask_rotate.log",
-            "when": "D",
-            "interval": 10,
-            "backupCount": 5,
+            "filename": os.path.join(log_dir, "flask_rotate.log"),
+            "when": "midnight",
+            "interval": 1,
+            "backupCount": 7,
             "formatter": "default",
         },
     },
-    "root": {"level": "DEBUG", "handlers": ["console", "time-rotate", "file"]},
+    "root": {
+        "level": "INFO",
+        "handlers": ["console", "time-rotate", "file"]
+    }
 })
 
 @app.after_request
@@ -66,6 +77,7 @@ def afterRequest(response):
     response.headers.extend(extra_headers)
     return response
 
+# Importar rutas después de configurar la app
 import rutas_inicio
 import rutas_upload
 import rutas_verfichero
@@ -73,5 +85,5 @@ import rutas_juegos
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8080))
-    host = os.environ.get('HOST')
+    host = os.environ.get('HOST', '0.0.0.0')
     app.run(host=host, port=port)

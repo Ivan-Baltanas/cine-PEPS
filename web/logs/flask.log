@@ -1,0 +1,10 @@
+[2025-04-24 10:50:28,768] INFO in _internal: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://172.26.0.3:8080
+[2025-04-24 10:50:28,768] INFO in _internal: [33mPress CTRL+C to quit[0m
+[2025-04-24 10:50:28,769] INFO in _internal:  * Restarting with stat
+[2025-04-24 10:50:28,945] WARNING in _internal:  * Debugger is active!
+[2025-04-24 10:50:28,984] INFO in _internal:  * Debugger PIN: 377-750-603
+[2025-04-24 10:50:36,011] INFO in _internal:  * Detected change in '/app/funciones_auxiliares.py', reloading
+[2025-04-24 10:50:36,036] INFO in _internal:  * Restarting with stat
