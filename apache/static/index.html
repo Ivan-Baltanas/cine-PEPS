@@ -35,12 +35,17 @@
                 .then(response => response.json())
                 .then(result => {
                     if (result.status == "OK") {
-                        location.href = "juegos.html";
+                        sessionStorage.setItem("csrf_token",result.csrf_token)
+                        sessionStorage.setItem("perfil",result.perfil)
+                        location.href="juegos.html";
                     } else {
-                        document.getElementsByClassName("error")[0].style.display = "block";
+                        document.getElementsByClassName("error")[0].style.display="block";
                     }
                 })
-                .catch(error => console.log('error', error)); 
+                .catch(error => {
+                    console.log('Error', error);
+                    document.getElementsByClassName("error")[0].style.display = "block";
+                }); 
         }
     </script>
 </head>

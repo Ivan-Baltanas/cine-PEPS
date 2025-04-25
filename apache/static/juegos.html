@@ -10,36 +10,64 @@
     <title>CineApp - Cartelera de Películass</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .oculto{
+            display: none;
+        }
+    </style>
     <script>
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        if (sessionStorage.getItem("csrf_token")){
+            myHeaders.append("X-CSRFToken",sessionStorage.getItem("csrf_token"))
+        }
+        var perfil="normal";
+        
         onload = function () {
+            if (sessionStorage.getItem("perfil")){
+                perfil=sessionStorage.getItem("perfil")
+                if (perfil=="admin"){
+                    document.getElementById("enlaceAgregar").classList.remove("oculto");
+                }
+            }
             cargarPeliculas();
         }
+        
         function pintarPeliculas(lista) {
-    let tbody = document.getElementsByTagName("tbody")[0];
-    tbody.innerHTML = "";
-    console.log("LISTITA")
-    console.log(lista);
-    console.log("AQUI ACABA")
-    lista.forEach(pelicula => {
-        tbody.innerHTML += `<tr>
-                <td><img src="${pelicula.poster}" width="70"></td>
-                <td>${pelicula.titulo}</td>
-                <td>${pelicula.sinopsis}</td>
-                <td>${pelicula.precio}</td>
-                <td>${pelicula.iva}</td>
-                <td>
-                    <a href="editar_juego.html?id=${pelicula.id}" class="button is-info">Editar</a>
-                </td>
-                <td>
-                    <button class="button is-danger" onclick="eliminarPelicula(${pelicula.id})">Eliminar</button>
-                </td>
-            </tr>`; 
-    });
-    lista=""
-}
+            let tbody = document.getElementsByTagName("tbody")[0];
+            tbody.innerHTML = "";
+            console.log("LISTITA")
+            console.log(lista);
+            console.log("AQUI ACABA")
+            lista.forEach(pelicula => {
+                let texto = `<tr>
+                    <td><img src="${pelicula.poster}" width="70"></td>
+                    <td>${pelicula.titulo}</td>
+                    <td>${pelicula.sinopsis}</td>
+                    <td>${pelicula.precio}</td>
+                    <td>${pelicula.iva}</td>
+                    <td>`;
+                
+                if (perfil=="admin"){
+                    texto += `<a href="editar_juego.html?id=${pelicula.id}" class="button is-info">Editar</a>
+                        </td>
+                        <td>
+                            <button class="button is-danger" onclick="eliminarPelicula(${pelicula.id})">Eliminar</button>
+                        </td>`;
+                } else {
+                    texto += `<td></td><td></td>`;
+                }
+                
+                texto += `</tr>`;
+                tbody.innerHTML += texto;
+            });
+            lista=""
+        }
+        
         function cargarPeliculas() {
             var requestOptions = {
-                method: 'GET'
+                method: 'GET',
+                headers: myHeaders
             };
 
             fetch("/api/juegos", requestOptions)
@@ -57,9 +85,11 @@
                     alert("Ha habido un error al cargar las películas. Refresque la página");
                 });
         }
+        
         function eliminarPelicula(id) {
             var requestOptions = {
-                method: 'DELETE'
+                method: 'DELETE',
+                headers: myHeaders
             };
 
             fetch("/api/juegos/" + id, requestOptions)
@@ -77,9 +107,11 @@
                     alert("Se ha producido un error y la película no ha podido ser eliminada");
                 });
         }
+        
         function cerrarSesion() {
             var requestOptions = {
-                method: 'GET'
+                method: 'GET',
+                headers: myHeaders
             };
             fetch("/api/logout", requestOptions)
                 .then(response => response.json())
@@ -94,7 +126,6 @@
                     console.log('error', error);
                     alert("Se ha producido un error y no se ha podido cerrar sesión");
                 });
-
         }
     </script>
 </head>
@@ -124,7 +155,7 @@
         <div class="columns">
             <div class="column">
                 <h3 class="is-size-3">Cartelera de Películas</h3>
-                <a href="./agregar_juego.html" class="button is-success">Agregar</a>
+                <a id="enlaceAgregar" href="./agregar_juego.html" class="button is-success oculto">Agregar</a>
                 <table class="table">
                     <thead>
                         <tr>

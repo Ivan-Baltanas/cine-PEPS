@@ -8,3 +8,4 @@ PyMySQL
 python-dotenv
 bleach
 pyopenssl
+flask-wtf

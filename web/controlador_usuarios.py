@@ -1,7 +1,7 @@
 from bd import obtener_conexion
 from funciones_auxiliares import create_session, compare_password, cipher_password
 import datetime as dt
-from flask_wtf.csrf import generate_csrf
+from flask_wtf.csrf import generate_csrf, CSRFProtect
 
 def login_usuario(username, passwordIn):
     try:

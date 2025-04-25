@@ -12,7 +12,16 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
     <script>
         var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
+        onload=()=>{
+            if (!sessionStorage.getItem("perfil") || sessionStorage.getItem("perfil")=="normal"){
+                location.href="juegos.html"
+            } else {
+                myHeaders.append("Content-Type", "application/json");
+                if (sessionStorage.getItem("csrf_token")){
+                    myHeaders.append("X-CSRFToken",sessionStorage.getItem("csrf_token"))
+                }
+            }
+        }
 
         function calcularIva(){
             let precio = parseFloat(document.getElementById("precio").value);
@@ -74,7 +83,7 @@
             </div>
         </div>
     </nav>
-  <section class="section">
+<section class="section">
     <div class="columns">
         <div class="column">
             <h3 class="is-size-3">Agregar Película</h3>
