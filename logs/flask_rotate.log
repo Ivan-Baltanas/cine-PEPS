@@ -10,3 +10,124 @@
 [2025-04-24 21:29:43,880] INFO in _internal: 172.18.0.5 - - [24/Apr/2025 21:29:43] "[31m[1mGET /juegos HTTP/1.1[0m" 403 -
 [2025-04-24 21:29:50,297] INFO in app: path: /login | method: POST | status: 200 OK | size: 55 >>> 172.18.0.5
 [2025-04-24 21:29:50,298] INFO in _internal: 172.18.0.5 - - [24/Apr/2025 21:29:50] "POST /login HTTP/1.1" 200 -
+[2025-05-13 10:09:42,177] INFO in _internal: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://172.18.0.3:8080
+[2025-05-13 10:09:42,177] INFO in _internal: [33mPress CTRL+C to quit[0m
+[2025-05-13 10:09:42,178] INFO in _internal:  * Restarting with stat
+[2025-05-13 10:09:42,426] WARNING in _internal:  * Debugger is active!
+[2025-05-13 10:09:42,426] INFO in _internal:  * Debugger PIN: 101-613-402
+[2025-05-13 10:10:32,173] INFO in controlador_usuarios: Acceso usuario root correcto
+[2025-05-13 10:10:32,175] INFO in app: path: /login | method: POST | status: 200 OK | size: 144 >>> 172.18.0.5
+[2025-05-13 10:10:32,176] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:10:32] "POST /login HTTP/1.1" 200 -
+[2025-05-13 10:10:32,278] INFO in app: path: /juegos | method: GET | status: 200 OK | size: 2 >>> 172.18.0.5
+[2025-05-13 10:10:32,279] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:10:32] "GET /juegos HTTP/1.1" 200 -
+[2025-05-13 10:10:33,629] INFO in app: path: /logout | method: GET | status: 200 OK | size: 16 >>> 172.18.0.5
+[2025-05-13 10:10:33,631] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:10:33] "GET /logout HTTP/1.1" 200 -
+[2025-05-13 10:10:41,362] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:10:41,363] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:10:41] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:10:49,528] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:10:49,530] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:10:49] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:10:49,934] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:10:49,936] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:10:49] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:10:50,086] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:10:50,087] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:10:50] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:10:50,255] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:10:50,256] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:10:50] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:10:50,414] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:10:50,415] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:10:50] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:12:37,353] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:12:37,355] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:12:37] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:12:57,304] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:12:57,305] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:12:57] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:13:05,135] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:13:05,136] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:13:05] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:13:06,455] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:13:06,455] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:13:06] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:13:06,638] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:13:06,639] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:13:06] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:13:06,790] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:13:06,790] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:13:06] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:13:06,963] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:13:06,964] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:13:06] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:13:07,142] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:13:07,142] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:13:07] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:13:07,341] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:13:07,342] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:13:07] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:13:07,533] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:13:07,534] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:13:07] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:13:07,701] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:13:07,702] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:13:07] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:13:07,869] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:13:07,870] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:13:07] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:13:08,013] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:13:08,014] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:13:08] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:13:12,803] INFO in controlador_usuarios: Acceso usuario root correcto
+[2025-05-13 10:13:12,803] INFO in app: path: /login | method: POST | status: 200 OK | size: 144 >>> 172.18.0.5
+[2025-05-13 10:13:12,804] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:13:12] "POST /login HTTP/1.1" 200 -
+[2025-05-13 10:13:12,836] INFO in app: path: /juegos | method: GET | status: 200 OK | size: 2 >>> 172.18.0.5
+[2025-05-13 10:13:12,836] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:13:12] "GET /juegos HTTP/1.1" 200 -
+[2025-05-13 10:14:34,297] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:14:34,298] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:14:34] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:15:08,145] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:15:08,146] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:15:08] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:21:44,951] INFO in _internal: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://172.18.0.3:8080
+[2025-05-13 10:21:44,951] INFO in _internal: [33mPress CTRL+C to quit[0m
+[2025-05-13 10:21:44,951] INFO in _internal:  * Restarting with stat
+[2025-05-13 10:21:45,161] WARNING in _internal:  * Debugger is active!
+[2025-05-13 10:21:45,161] INFO in _internal:  * Debugger PIN: 233-164-705
+[2025-05-13 10:22:21,432] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:22:21,433] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:22:21] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:22:46,093] INFO in app: path: /login | method: POST | status: 200 OK | size: 55 >>> 172.18.0.5
+[2025-05-13 10:22:46,095] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:22:46] "POST /login HTTP/1.1" 200 -
+[2025-05-13 10:23:20,790] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:23:20,791] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:23:20] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:23:21,984] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:23:21,985] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:23:21] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:23:22,169] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:23:22,170] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:23:22] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:23:22,322] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:23:22,323] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:23:22] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:23:22,459] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:23:22,460] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:23:22] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:23:22,641] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:23:22,643] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:23:22] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:23:22,788] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:23:22,789] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:23:22] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:23:22,937] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:23:22,938] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:23:22] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:23:23,105] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:23:23,106] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:23:23] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:23:23,289] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:23:23,290] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:23:23] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:23:23,458] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:23:23,459] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:23:23] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:23:23,617] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:23:23,618] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:23:23] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:23:23,793] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:23:23,794] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:23:23] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:23:23,977] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:23:23,978] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:23:23] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:23:24,177] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:23:24,178] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:23:24] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:23:24,345] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:23:24,346] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:23:24] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:23:24,507] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:23:24,508] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:23:24] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:23:24,641] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:23:24,642] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:23:24] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:23:24,785] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:23:24,786] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:23:24] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:23:24,929] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:23:24,930] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:23:24] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:23:25,105] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:23:25,106] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:23:25] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:29:36,717] INFO in app: path: /registro | method: POST | status: 401 UNAUTHORIZED | size: 25 >>> 172.18.0.5
+[2025-05-13 10:29:36,718] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:29:36] "[31m[1mPOST /registro HTTP/1.1[0m" 401 -
+[2025-05-13 10:32:36,575] INFO in controlador_usuarios: Nuevo usuario creado
+[2025-05-13 10:32:36,575] INFO in app: path: /registro | method: POST | status: 200 OK | size: 16 >>> 172.18.0.5
+[2025-05-13 10:32:36,575] INFO in _internal: 172.18.0.5 - - [13/May/2025 10:32:36] "POST /registro HTTP/1.1" 200 -
