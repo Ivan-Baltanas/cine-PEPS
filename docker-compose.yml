@@ -7,7 +7,7 @@ services:
     ports:
       - 6102:80
     volumes:
-      - ./apache/static:/var/www
+      - ./apache/static:/var/www/html
     depends_on:
       - python
     networks:
