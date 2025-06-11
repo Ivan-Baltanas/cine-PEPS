@@ -10,7 +10,7 @@ RUN apt-get update && \
     apt-get clean
 
 # Copiar el archivo de configuración personalizado de Apache
-COPY demo.apache.conf /etc/apache2/sites-available/000-default.conf
+COPY apache/demo.apache.conf /etc/apache2/sites-available/000-default.conf
 
 # Descargar OWASP CRS
 RUN git clone --depth 1 https://github.com/coreruleset/coreruleset.git /opt/owasp-crs && \
