@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   apache:
-    build: ./apache
+    image: ivanbaltanas/pepsapache
     container_name: apache2b
     ports:
       - 6102:80
@@ -14,7 +14,7 @@ services:
       - backend
 
   python:
-    build: .
+    image: ivanbaltanas/pepspython
     container_name: python2b
     restart: always
     environment:
